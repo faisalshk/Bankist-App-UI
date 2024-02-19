@@ -673,3 +673,110 @@ h4 {
   font-size: 1.5rem;
   font-weight: 400;
 }
+
+/* General styles */
+
+/* Media queries for mobile and tablet devices */
+@media only screen and (max-width: 412px) and (max-height: 915px) {
+  body {
+    font-size: 10px; /* Adjust font size for smaller screens */
+    line-height: 1.6; /* Increase line height for better readability */
+  }
+
+  .section {
+    padding: 10rem 1rem; /* Reduce padding on sections */
+  }
+
+  .nav {
+    padding: 0 1rem; /* Reduce padding on navigation */
+  }
+
+  .nav__logo {
+    height: 3.5rem; /* Decrease logo size */
+  }
+
+  .nav__links {
+    display: none; /* Hide navigation links by default */
+  }
+
+  .nav__item {
+    margin-left: 2rem; /* Adjust margin for navigation items */
+  }
+
+  .nav__link--btn {
+    padding: 0.6rem 1.5rem; /* Adjust button padding */
+    font-size: 1.4rem; /* Decrease font size for buttons */
+  }
+
+  .header {
+    padding: 0 1rem; /* Reduce header padding */
+  }
+
+  .header__title {
+    grid-template-columns: 1fr; /* Change grid layout for header title */
+    row-gap: 2rem; /* Adjust row gap */
+    text-align: center; /* Center align header text */
+  }
+
+  .header__img {
+    display: none; /* Hide header image on smaller screens */
+  }
+
+  .features {
+    grid-template-columns: 1fr; /* Change grid layout for features */
+    gap: 2rem; /* Adjust gap between feature items */
+    margin: 0 1rem; /* Reduce margin on features */
+  }
+
+  .features__img,
+  .features__icon {
+    justify-self: center; /* Center align feature images and icons */
+  }
+
+  .features__feature {
+    width: 100%; /* Adjust feature item width */
+    text-align: center; /* Center align feature text */
+  }
+
+  .operations__tab-container {
+    justify-content: center; /* Center align operation tabs */
+  }
+
+  .slider {
+    height: 50rem; /* Adjust slider height */
+  }
+
+  .slider__btn {
+    font-size: 1.5rem; /* Decrease button font size */
+  }
+
+  .dots {
+    bottom: 2%; /* Adjust dots position */
+  }
+
+  .testimonial {
+    width: 100%; /* Adjust testimonial width */
+  }
+
+  .cookie-message {
+    font-size: medium;
+    padding: inherit;
+    border-radius: 5px;
+  }
+  .operations__content {
+    padding: 30px;
+  }
+
+  .operations__tab {
+    font-size: small;
+    margin: 5px 5px;
+    padding: 5px 20px;
+  }
+
+  .footer__nav {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 5px;
+    align-items: center;
+  }
+}

@@ -422,3 +422,340 @@ const sliderAnimation = function () {
   });
 };
 sliderAnimation();
+
+//////////////////////////////////////////////////////////////
+//DOM API
+/*
+DOM is basically the interface between the JS code and the browser. More specifically Html documents that are rendered in by the browser.
+
+1 - DOM allows us to make JS interact with the browser
+
+2 - We can write JS to create, modify and delete html elements, set styles, classes and attributes and listen and respond to events
+
+3 - DOM tree is generated from an html document, which we can then interact with
+
+(A DOM tree is a tree like structure which is made out of nodes)
+
+4 - DOM is a very complex API (application programming interface) that contains lots of methods and properties to interact with the DOM tree.
+
+the DOM has many methods such as querySelectorALL(), querySelector(), addEventListner(),. children(), .innerHTML(), .TextContent(), .CreateElement() etc.
+
+In DOM there are different types of nodes some are html elements, and some are just text.
+
+ALL the different DOM properties are organized into different types of objects.
+
+A Node has different child type :
+
+element - text - comment - document
+
+the element type has a child type called htmlelement and each html element has different attribute
+
+the html elements are - htmlbuttonelement, htmlimageelement, htmldivelement etc
+
+and all of this work because of something called inheritace.
+
+Inheritance is basically that every child type will have access to all the properties and methods of its parent type.
+
+the DOM API needs a way to of allowing all the node types to listen to events and we usually listen to events by calling the addEventListner Method on an element or the document. This works because of a special node type which is called Event Target which is a parent of both the node type and the window node type and because of inheritance we can call the add event listner method to every single type of node in the DOM API because all the elements, text, comments, documents will inherit this method.
+
+Note - The Event Target is an abstract and we do not use this in practice
+*/
+//////////////////////////////////////////////////////////////
+// Selecting, Creating, and Deleting Elements
+//Selceting elements
+//selecting the entire document
+console.log(document.documentElement);
+//if we want to apply css style to the entire document we need to use documentElement
+
+//selecting head
+console.log(document.head);
+//selecting body
+console.log(document.body);
+
+// const header = document.querySelector('.header');
+// const allSections = document.querySelectorAll('.section'); //will return a node list
+//this methods are also available for elements
+document.getElementById('section--1');
+const allButtons = document.getElementsByTagName('button');
+console.log(allButtons); // this methods will return a HTML collection and not a node list
+// if we change anything in the DOM then this collection will be updated automatically and all of this does not happen in the node list
+
+console.log(document.getElementsByClassName('btn'));
+// this will also return a life html collection
+
+//CREATING elements//////////////////////////////////////////
+// create an element
+//this will return a dom element that we can save some where
+const message = document.createElement('div');
+//adding a class to the element
+message.classList.add('cookie-message');
+//adding text to the element
+message.textContent = 'We use Cookies for improved functionality and analytics';
+// inserting the message t the html
+message.innerHTML =
+  'We use Cookies for improved functionality and analytics. <button class = "btn btn--close--cookie">Got it!</button>';
+//appending the message in to the header
+// header.prepend(message);
+//perpending basically adds the element as the first child of this element
+//we can also add it as the last child
+header.append(message);
+
+//as we can see the element is only iserted once this is because it is now life element is living inside the dom therefore it cannot be at multiple places at same time
+
+//we can use the prepend and the append methods to move the elements
+
+// to insert multiple copies of the same element
+//first we need to copy the first element
+// header.append(message.cloneNode(true));
+//the cloneNode() will copy the node and passing true means all the child element will be copied
+
+//this will display the element before the header
+// header.before(message);
+// And this display the element after the header
+// header.after(message);
+
+//DELETE element
+// now we remove the element after we click the got it button
+document
+  .querySelector('.btn--close--cookie')
+  .addEventListener('click', function () {
+    message.remove();
+  });
+//////////////////////////////////////////////////////////////
+// Styles, Attributes and Classes
+/*
+//Styles
+// to set a style on the element
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+
+//reade style
+console.log(message.style.height); // the style property only works for inline styles and also we cannot get a style which is hidden in the class
+console.log(message.style.backgroundColor); //rgb(55, 56, 61)
+
+// but if we want the styles which is in the class
+console.log(getComputedStyle(message));
+console.log(getComputedStyle(message).color); //rgb(187, 187, 187)
+
+console.log(getComputedStyle(message).height); //58.9688px
+
+//lets increase the height
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height, 10) + 20 + 'px';
+
+//Setting CSS custom properties
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+//Attributes*********************
+//read attributes value
+//standard attribute
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt); //Bankist logo
+console.log(logo.src); //http://127.0.0.1:5500/13-Advanced-DOM-Bankist/starter/img/logo.png
+console.log(logo.className); //nav__logo
+console.log(logo.getAttribute('src')); //img/logo.png
+//Set Attribute
+logo.alt = 'beautiful Logo';
+logo.setAttribute('company', 'Bankist');
+//non standard attribute
+//read
+console.log(logo.designer); //indefined
+console.log(logo.getAttribute('designer')); //Faisal
+
+//Data Attributes
+// data attributes are special kind or attributes that start with data
+console.log(logo.dataset.versionNumber); //3.0
+
+//Classes
+// logo.classList.add();
+// logo.classList.remove();
+// logo.classList.toggle();
+// logo.classList.contains();
+
+//do not use this because this overwrite all the other classes and allow us to give only one class
+// logo.className = 'Faisal'
+*/
+/////////////////////////////////////////////////////////////
+//smooth scrolling
+// const btnScrollTo = document.querySelector('.btn--scroll-to');
+// const section1 = document.querySelector('#section--1');
+
+// btnScrollTo.addEventListener('click', function (e) {
+//   //first get the co-ordinates of the element we want to scroll to
+//   const sectionCords = section1.getBoundingClientRect();
+//   console.log(sectionCords);
+//   //DOMRect {x: -30, y: 846, width: 996, height: 1538.8828125, top: 846, …}
+
+//   //co-ordinates of the target element
+//   console.log(e.target.getBoundingClientRect());
+
+//   //current scroll
+//   console.log('current scroll(X/Y)', window.pageXOffset, pageYOffset); //current scroll(X/Y) 0 300
+
+//   //demensions of the viewport
+//   console.log(
+//     'height and width of viewport',
+//     document.documentElement.clientHeight,
+//     document.documentElement.clientWidth
+//   ); //height and width of viewport 820 996
+
+//   //scrolling
+//   // window.scrollTo(
+//   //   sectionCords.left + window.pageXOffset,
+//   //   sectionCords.top + window.pageYOffset
+//   // );
+//   //old way
+//   // window.scrollTo({
+//   //   left: sectionCords.left + window.pageXOffset,
+//   //   top: sectionCords.top + window.pageYOffset,
+//   //   behavior: 'smooth',
+//   // });
+
+//   //es6 way
+//   section1.scrollIntoView({ behavior: 'smooth' });
+// });
+//////////////////////////////////////////////////////////////
+// Types of Events and Event Handlers
+// An event is basically a signal that is generated by a certian dom node and signal means that something has happened
+//ex - click, mouse moving etc...
+// mouse enter event
+// const h1 = document.querySelector('h1');
+// h1.addEventListener('mouseenter', function (e) {
+//   alert('addEvent listner: you are reading the heading');
+// });
+
+//Old way
+// h1.onmouseenter = function (e) {
+//   alert('addEvent listner: you are reading the heading');
+// };
+
+//how to remove an event handler after appearing once***
+//export the function into a named function
+// const alerth1 = function (e) {
+//   alert('addEvent listner: you are reading the heading');
+
+//   h1.removeEventListener('mouseenter', alerth1);
+// };
+//h1.addEventListener('mouseenter', alerth1);
+//now we can only listen the event once
+
+//using settimeout
+// const alerth1 = function (e) {
+//   alert('addEvent listner: you are reading the heading');
+// };
+// h1.addEventListener('mouseenter', alerth1);
+// setTimeout(() => h1.removeEventListener('mouseenter', alerth1), 3000);
+/////////////////////////////////////////////////////////////
+// Event Propagation: Bubbling and Capturing (in practice)
+// attching event handlers to the navigation links and also its parent element
+/*
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)}`;
+
+//attching event handlers to features navigation link and it's parent element
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK', e.target, e.currentTarget);
+  //e.target is used to know where the event actually happened
+  //the currentTarget is indeed the element on which the event handler is attached
+  //therefore
+  console.log(e.currentTarget === this); //true
+  // in an event handler the this keyword is always points to the element the event handler is attached
+
+  //stop propogation
+  // e.stopPropagation();
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  console.log('Container', e.target, e.currentTarget);
+  this.style.backgroundColor = randomColor();
+});
+
+document.querySelector('.nav').addEventListener('click', function (e) {
+  console.log('nav', e.target, e.currentTarget);
+  this.style.backgroundColor = randomColor();
+});
+*/
+////////////////////////////////////////////////////////////
+//DOM traversing
+/*
+//working with h1 element and from here we can go downwards, upwards and also sideways
+const h1 = document.querySelector('h1');
+//querySelector slects the children no matter how deep it is in the dom tree
+// Going Downwards: selecting child elements
+console.log(h1.querySelectorAll('.highlight')); //NodeList(2) [span.highlight, span.highlight]
+//this selects all the elements of the highlight class that are children of the h1 element
+// And other elements of the highlight class will not be selected because they are not the children of the h1 element
+
+// IF we want direct children
+console.log(h1.childNodes); //NodeList(9) [text, comment, text, span.highlight, text, br, text, span.highlight, text]
+// In this we get every child element
+
+//gives an HTML life collection
+console.log(h1.children); //HTMLCollection(3) [span.highlight, br, span.highlight]
+
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'white';
+
+// Going upwards: selecting parents
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+//selecting a parent element which is far above the DOM tree
+h1.closest('.header').style.background = 'var(--gradient-secondary)'; // setting a CSS custom attributes
+// Closest selects the parent element no matter how far up the dom tree passing the parent element
+
+// Going sideways: selecting siblings
+// in JS we can only select direct siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+// If we all of the siblings elements and not just previous and the next one
+// then we can use the trick of moving up to the parent element
+console.log(h1.parentElement.children); //HTMLCollection(4) [h1, h4, button.btn--text.btn--scroll-to, img.header__img]
+// it will also include itself
+
+[...h1.parentElement.children].forEach(function (el) {
+  //stylilng all the siblings except the element itself
+  if (el != h1) {
+    el.style.transform = 'scale(0.5)';
+  }
+});
+*/
+/////////////////////////////////////////////////////////
+//Lifecycle DOM Events
+//DOM content loaded
+//this event fired by the document as soon as the HTML is completely parsed which means the HTML has been downloaded and been converted to the DOM tree
+// And also all the scripts must be downloaded and excuted
+// before the DOM content loaded event can happen
+
+//with this here we can now execute the code after the  DOM is completely loaded
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML parsed and Dom tree built!!', e);
+});
+
+//note - but if we have the script tag in the html at the bottom then we do not have to lsiten to the DOM content loaded event.
+//how to load JS file in the vanilla js file or jquery
+
+//the loaded event
+//this event is only fired when all the html and the images and the css file are loaded
+//so basically when the complete page has finished loading is when this event is fired
+window.addEventListener('load', function (e) {
+  console.log('page fully loaded ', e);
+});
+
+//before unload***
+//this event is created before a user is about to leave the page
+//And if we want to ask the user if he 100% want to leave the page
+//but interaction with the page is necessary
+// window.addEventListener('beforeunload', function (e) {
+//   e.preventDefault();
+//   console.log(e);
+//   e.returnValue = '';
+// });
